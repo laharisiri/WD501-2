@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body{
+            background-image:linear-gradient(50deg,white,rgba(12,247,200,0.5),white);
+            background-repeat: no-repeat;
+            height:800px;
+        }
+        form{
+               border:10px solid rgba(12, 247, 255, 0.575);
+                background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.945), rgba(12, 247, 255, 0.575),rgba(255,255,255,0.945)); 
+               background-color:#cccc;
+               box-shadow: 5px 5px 5px black;
+               width: 300px;
+               text-align:center;
+               margin:0 auto;
+               background-repeat:no-repeat;
+               padding:30px;
+               
+        }
+        .m{
+            padding:20px;
+            
+        }
+        .m1{
+            padding: 5px;
+        }
+        .m2{
+            margin-left:-0.9cm;
+        }
+        input{
+            border:3px double black;
+        }
+        div{
+           border:10px solid rgba(12, 247, 255, 0.575);
+           border-radius:20px;
+           box-shadow: 0px 5px 5px black,-5px 0px 5px black;
+           width:650px;
+           height:auto;
+           margin:0 auto;
+           padding:15px;
+        }
+        #table{
+            background-image: linear-gradient(45deg,rgba(12, 247, 255, 0.575),rgba(255,255,255,0.9),rgba(12,247,255,0.575));
+
+        }
+        td,th{
+            padding: 15px;
+        }
+        button:hover{
+            background-color: aqua;
+            color: black;
+        }
+        button{
+            margin-left: 200px;
+            border:3px double black;
+            border-radius:20px;
+        }
+    </style>
+
+</head>
+<body>
+    <center><h1><u>REGISTRATION FORM</u></h1></center>
+    <form id="form">
+       <label for="name" class="m">NAME:</label> &nbsp &nbsp <input type="text" placeholder="Enter Name" id="name" name="name" required ><br><br>
+       <label for="email"class="m">EMAIL:</label> &nbsp &nbsp<input type="email" placeholder="Enter Email" id="email" name="email" required><br><br>
+       <label for="password" class="m1">PASSWORD:</label>&nbsp &nbsp<input type="password" placeholder="Enter Password" id="pass" name="password" required><br><br>
+       <label for="dob" class="m2">DATE OF BIRTH:</label> &nbsp &nbsp<input type="date" placeholder="Enter birth date" id="do" name="dob" min="1980-04-30" max="2005-04-30" required><br><br>
+       <input type="checkbox" id="ch" name="checkbox" required>&nbsp &nbsp<label for="checkbox">ACCEPT TERMS AND CONDITIONS</label><br><br>
+       <button id="button">SUBMIT</button>
+    </form><br><br>
+    <div>
+        <center>
+            <h1 id="ent"><u>ENTRIES</u></h1> 
+        </center> 
+        <table style="width:100%" id="table" border="2">
+            <tr>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>PASSWORD</th>
+              <th>DOB</th>
+              <th>ACCEPTED TERMS?</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var form = document.getElementById('form');
+        var tableBody = document.querySelector('table');
+        form.addEventListener('submit',function(event){
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('pass').value;
+            var dob = document.getElementById('do').value;
+            var checkbox = document.getElementById('ch').checked;
+            localStorage.setItem("NAME",name);
+            localStorage.setItem("EMAIL", email);
+            localStorage.setItem("PASSWORD", password);
+            localStorage.setItem("DOB", dob);
+            localStorage.setItem("ACCEPTED TERMS?", checkbox);
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${email}</td>
+        <td>${password}</td>
+        <td>${dob}</td>
+        <td>${checkbox ? 'Yes' : 'No'}</td>`;
+        tableBody.appendChild(newRow);
+        form.reset();
+        });
+    </script>
+</body>
+</html>
